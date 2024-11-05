@@ -3,12 +3,12 @@ import { SignInSchema } from "@/libs/validationSchema";
 import { Button, Input } from "@nextui-org/react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function SignInForm() {
-  const router = useRouter();
+  const searchParams = useSearchParams();
   const [pending, setPending] = useState<boolean>(false);
   const [inputs, setInputs] = useState({
     email: "",
@@ -18,6 +18,11 @@ export default function SignInForm() {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    const errorMessage = searchParams.get("error");
+    if (errorMessage) toast.error(errorMessage);
+  }, [searchParams]);
 
   const handleSignIn = async () => {
     if (pending) return;
@@ -43,22 +48,12 @@ export default function SignInForm() {
     });
 
     setPending(true);
-    const signInDetails = await signIn("credentials", {
+    await signIn("credentials", {
       email: validatedFields.data.email,
       password: validatedFields.data.password,
       callbackUrl: "/",
-      redirect: false,
     });
     setPending(false);
-
-    if (!signInDetails?.ok) {
-      toast.error(signInDetails?.error);
-      setInputs({ ...inputs, password: "" });
-      return;
-    }
-
-    toast.success("Logged in.");
-    router.replace("/");
   };
   return (
     <>
