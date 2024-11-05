@@ -3,12 +3,11 @@ import { SignInSchema } from "@/libs/validationSchema";
 import { Button, Input } from "@nextui-org/react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 export default function SignInForm() {
-  const router = useRouter();
   const [pending, setPending] = useState<boolean>(false);
   const [inputs, setInputs] = useState({
     email: "",
@@ -58,7 +57,7 @@ export default function SignInForm() {
     }
 
     toast.success("Logged in.");
-    router.replace("/");
+    redirect("/", RedirectType.replace);
   };
   return (
     <>
