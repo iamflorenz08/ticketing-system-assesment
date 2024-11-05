@@ -31,6 +31,8 @@ import { FaCircle } from "@react-icons/all-files/fa/FaCircle";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useSWRConfig } from "swr";
+import { HiPencilSquare } from "@react-icons/all-files/hi2/HiPencilSquare";
+import { LuSave } from "@react-icons/all-files/lu/LuSave";
 
 interface IProps {
   ticket?: ITicket;
@@ -72,7 +74,13 @@ export default function CreateTicket({ ticket, editMode = false }: IProps) {
   return (
     <>
       <Button onPress={onOpen} color="primary">
-        {editMode ? "Edit" : "Create a ticket"}
+        {editMode ? (
+          <>
+            <HiPencilSquare /> Edit
+          </>
+        ) : (
+          "Create a ticket"
+        )}
       </Button>
 
       <Modal
@@ -227,6 +235,7 @@ export default function CreateTicket({ ticket, editMode = false }: IProps) {
                   className="bg-green-600 text-white"
                   isLoading={pending}
                 >
+                  <LuSave />
                   {editMode ? "Save" : "Create ticket"}
                 </Button>
               </ModalFooter>

@@ -4,6 +4,10 @@ export const API = {
     ticket: {
         index: '/api/v1/tickets',
         ticket_id: '/api/v1/tickets/:ticket_id'
+    },
+    auth: {
+        signUp: '/api/v1/auth/sign-up',
+        signIn: '/api/v1/auth/sign-in',
     }
 }
 

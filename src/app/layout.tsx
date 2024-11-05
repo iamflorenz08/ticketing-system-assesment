@@ -3,6 +3,7 @@ import "./globals.css";
 import { NextUIProvider } from "@nextui-org/react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthProvider from "./AuthProvider";
 
 export const metadata: Metadata = {
   title: "Ticketing System",
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NextUIProvider>{children}</NextUIProvider>
+        <AuthProvider>
+          <NextUIProvider>{children}</NextUIProvider>
+        </AuthProvider>
         <ToastContainer position="bottom-right" />
       </body>
     </html>
