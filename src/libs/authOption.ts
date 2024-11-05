@@ -5,6 +5,7 @@ import { fetchData } from "@/libs/fetch";
 import { IUser } from "@/models/User";
 
 export const AuthOption: NextAuthOptions = {
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
         CredentialsProvider({
             credentials: {
