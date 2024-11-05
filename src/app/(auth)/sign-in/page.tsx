@@ -18,7 +18,7 @@ export default function page() {
         <Divider className="my-4" />
         <span className="text-center">
           Don&apos;t have an account?{" "}
-          <Link href={"/sign-up"} className="text-blue-400">
+          <Link href={"/sign-up"} replace={true} className="text-blue-400">
             Sign up
           </Link>
         </span>
